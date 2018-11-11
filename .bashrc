@@ -21,7 +21,7 @@ export LC_MESSAGES="en_US.UTF-8"
 
 source ~/.git-prompt.sh
 # we pass 2 parameters to __git_ps1 as pre and post which are strings.
-export PROMPT_COMMAND='__git_ps1 "\u@\h: \[\033[32m\]\w\[\033[33m\]" "\[\033[00m\] \\\$ "'
+export PROMPT_COMMAND='__git_ps1 "\u@\h: \[\033[32m\]\w\[\033[00m\]" "\[\033[00m\] \\\$ "'
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
 GIT_PS1_SHOWUPSTREAM="verbose name"
