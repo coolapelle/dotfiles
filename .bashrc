@@ -7,14 +7,7 @@
 
 # ~/.bashrc: executed by bash(1) for interactive shells.
 
-# The copy in your home directory (~/.bashrc) is yours, please
-# feel free to customise it to create a shell
-# environment to your liking.  If you feel a change
-# would be benifitial to all, please feel free to send
-# a patch to the msys2 mailing list.
-
 # User dependent .bashrc file
-
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
 [[ -z "$TMUX"  ]] && { tmux attach || exec tmux new-session && exit;}
@@ -26,11 +19,15 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
 
-parse_git_branch() {
-#     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-      git symbolic-ref HEAD --short
-}
-export PS1="\u@\h \[\033[32m\]\w\[\033[33m\] (\$(parse_git_branch))\[\033[00m\] $ "
+source ~/.git-prompt.sh
+# we pass 2 parameters to __git_ps1 as pre and post which are strings.
+export PROMPT_COMMAND='__git_ps1 "\u@\h: \[\033[32m\]\w\[\033[33m\]" "\[\033[00m\] \\\$ "'
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWUPSTREAM="verbose name"
+GIT_PS1_HIDE_IF_PWD_IGNORED=true
+GIT_PS1_SHOWCOLORHINTS=true
+
 # See man bash for more options...
 #
 # Don't wait for job termination notification
