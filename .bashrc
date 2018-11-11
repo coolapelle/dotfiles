@@ -17,15 +17,20 @@
 
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
-[[ -z "$TMUX" ]] && exec tmux
+[[ -z "$TMUX"  ]] && { tmux attach || exec tmux new-session && exit;}
 
 # Shell Options
-#
 export LANG=en_US.UTF-8
 export LC_CTYPE="en_US.UTF-8"
 export LC_NUMERIC="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
+
+parse_git_branch() {
+#     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+      git symbolic-ref HEAD --short
+}
+export PS1="\u@\h \[\033[32m\]\w\[\033[33m\] (\$(parse_git_branch))\[\033[00m\] $ "
 # See man bash for more options...
 #
 # Don't wait for job termination notification
@@ -64,7 +69,7 @@ export LC_MESSAGES="en_US.UTF-8"
 # History Options
 #
 # Don't put duplicate lines in the history.
-# export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 #
 # Ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
