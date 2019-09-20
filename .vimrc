@@ -1,13 +1,4 @@
 " An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2011 Apr 15
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
@@ -18,8 +9,38 @@ endif
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" Plugins handling using vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+	  silent !curl -fLko ~/.vim/autoload/plug.vim --create-dirs
+	      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/plugged')
+Plug 'vim-scripts/Zenburn'
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'w0rp/ale'
+call plug#end()
+
+"Set leader key to Space
+let mapleader = " "
+" Tests to show that leader works
+nnoremap <Leader><Leader>a :echo "Hey kebab ,"<CR>
+nnoremap <Leader>a :echo "Hey there ,"<CR>
+
+" Split navigation
+map <C-j> <C-W>j<C-W>
+map <C-k> <C-W>k<C-W>
+map <C-h> <C-W>h<C-W>
+map <C-l> <C-W>l<C-W>
+
+set timeoutlen=1000
+set ttimeoutlen=0
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
+
+" Activate zenburn plugin
+:colorscheme zenburn
 
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
@@ -86,7 +107,7 @@ else
 
   set autoindent		" always set autoindenting on
 
-endif " has("autocmd")
+endif " has("autcmd")
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -95,3 +116,8 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
+
+"Pymode options
+let g:pymode = 1
+let g:pymode_options_max_line_length = 120
+
