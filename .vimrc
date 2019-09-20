@@ -28,10 +28,10 @@ nnoremap <Leader><Leader>a :echo "Hey kebab ,"<CR>
 nnoremap <Leader>a :echo "Hey there ,"<CR>
 
 " Split navigation
-map <C-j> <C-W>j<C-W>
-map <C-k> <C-W>k<C-W>
-map <C-h> <C-W>h<C-W>
-map <C-l> <C-W>l<C-W>
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
 set timeoutlen=1000
 set ttimeoutlen=0
