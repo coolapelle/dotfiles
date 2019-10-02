@@ -17,8 +17,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 Plug 'vim-scripts/Zenburn'
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-Plug 'w0rp/ale'
+" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" Plug 'w0rp/ale'
+Plug 'scrooloose/syntastic' 
 call plug#end()
 
 "Set leader key to Space
@@ -118,6 +119,16 @@ if !exists(":DiffOrig")
 endif
 
 "Pymode options
-let g:pymode = 1
+let g:pymode = 0
 let g:pymode_options_max_line_length = 120
+let g:pymode_python = 'python3'
 
+" Default syntastic options
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0

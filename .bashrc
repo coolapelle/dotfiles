@@ -115,6 +115,8 @@ alias ls='ls -hF --color=tty'                 # classify files in colour
 alias la='ls -hFA --color=tty'                              # all but . and ..
 # alias l='ls -CF'                              #
 
+alias cdprog='cd /c/Programmering'
+
 # Umask
 #
 # /etc/profile sets 022, removing write perms to group + others.
